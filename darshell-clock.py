@@ -143,7 +143,6 @@ def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 	baseY = _y
 	baseX = _x
 
-	numColumns = 1
 	numLines = 0
 	totalWidth = 0
 	maxLenCol = 1
@@ -183,7 +182,6 @@ def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 		for xx in range(totalWidth - 1):
 			stdscr.addch(_y + yy + 1, _x + xx + 1, '⠀', curses.color_pair(8))# + curses.A_REVERSE)
 
-	numColumns = 1
 	numLines = 0
 	#totalWidth = 0
 	maxLenCol = 1
@@ -237,7 +235,6 @@ def draw_main(stdscr):
 	global isHelp
 	global isDateAff
 	global colorClockNum
-	global colorSecsNum
 	global colorDateNum
 	global lastKey
 	global arrNum
