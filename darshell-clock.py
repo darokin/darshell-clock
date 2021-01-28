@@ -42,9 +42,22 @@ helpMenu = (
 	("T", "Time color")
 )
 
+helpMenu = (
+	("H", "kjep"), 
+	("S", " date"),
+	("Q", "Quit"),
+	("C", "Date r"),
+	("T", "Time or"),
+	("f", "ShggHigp"), 
+	("d", "Shate"),
+	("g", "Qgit"),
+	("s", "Dateaor"),
+	("g", "Tlojh")
+)
+
 arrNum 		= arrNumBig
 isBig 		= True
-isHelp 		= False
+isHelp 		= True
 isDateAff 	= True
 colorClockNum = 2
 colorDateNum = 1
@@ -128,33 +141,54 @@ def endcurse(stdscr, bError):
 		exit()
 
 # Draw the help box
-def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
+def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 	baseY = _y
 	baseX = _x
 
-	numLines = 0
+	# TODO remove le nbLines c'est useless personne ne s'en servira on calcul avec colonnes c bon
+
+	# TODO add X and Y spacing parameters
+	# TODO faire aussi une border exterieur de 1 de black ? Ou mieux passer une background color tou
+
+	# TODO BG color !
+
+
+	# TODO en faire une classe ...
+	# TODO faire des surcharges d'appels, params obsolètes etc
+
 	totalWidth = 0
 	maxLenCol = 1
-	bGuessNumLines = True
 	ind = 0
 
+	if _nbCols > 0:
+		_nbLines = ceil(len(helpMenu), _nbCols)
+	elif _nbLines == 0:
+	 	_nbLines = len(helpMenu)
+
+	maxLenColsArr = []
 	# Find width now if centering needed
-	for vv in _data:
-		# Line size for columns
-		if bGuessNumLines:
-			numLines += 1
-		numLines = _nbLines
+	for ind, vv in enumerate(_data):
+		# Deducting max width of the column
 		lineLen = 1 + len(vv[0]) + 1 + len(vv[1]) + 1
 		if lineLen > maxLenCol:
 			maxLenCol = lineLen
-		ind = _data.index(vv)
+		#ind = _data.index(vv)
 		# Test exit
-		if ind == (len(_data) - 1):
+		# if ind == (len(_data) - 1):
+		# 	totalWidth = totalWidth + maxLenCol + 1
+		# 	break
+		# if ind > 0 and ((ind + 1) % _nbLines) == 0:
+		# 	totalWidth = totalWidth + maxLenCol + 1
+		# 	maxLenColsArr.append(maxLenCol)
+		# 	maxLenCol = 1
+		# if ind == (len(_data) - 1):
+		# 	totalWidth = totalWidth + maxLenCol + 1
+		# 	break 
+		if ind > 0 and (((ind + 1) % _nbLines) == 0 or ind == (len(_data) - 1)):
 			totalWidth = totalWidth + maxLenCol + 1
-			break
-		if ind > 0 and ((ind + 1) % numLines) == 0:
-			totalWidth = totalWidth + maxLenCol + 1
+			maxLenColsArr.append(maxLenCol)
 			maxLenCol = 1
+		
 
 	# Centering calculations
 	height, width = stdscr.getmaxyx()
@@ -162,55 +196,84 @@ def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 		_x = int((width // 2) - (totalWidth // 2))	
 		baseX = _x
 	if _y == -1:
-		_y = int((height // 2) - ceil(numLines, 2))	
+		_y = int((height // 2) - ceil(_nbLines, 2))	
 		baseY = _y
 
+	# TODO test si on déborde...et replace pour pas planter
+
 	# Background
-	for yy in range(numLines):
+	for yy in range(_nbLines):
 		for xx in range(totalWidth - 1):
 			stdscr.addch(_y + yy + 1, _x + xx + 1, '⠀', curses.color_pair(8))# + curses.A_REVERSE)
 
-#	numLines = 0
-	maxLenCol = 1
-	bGuessNumLines = True
-	ind = 0
-	_y = baseY + 1
-	for vv in _data:
-		# Line size for columns
-		# if bGuessNumLines:
-		# 	numLines += 1
-		# numLines = _nbLines
-		lineLen = 1 + len(vv[0]) + 1 + len(vv[1]) + 1
-		if lineLen > maxLenCol:
-			maxLenCol = lineLen
 
+	maxLenColInd = 0
+	_y = baseY + 1
+	for ind, vv in enumerate(_data):
+		# Show help info 
 		stdscr.addstr(_y, _x + 2, vv[0], curses.color_pair(_color) + curses.A_BOLD)
 		stdscr.addstr(_y, _x + 4, vv[1])
-		ind = _data.index(vv)
 
 		# Test exit
 		if ind == (len(_data) - 1):
 			break
-
-		if ind > 0 and ((ind + 1) % numLines) == 0:
+		
+		# End of line
+		if ind > 0 and (((ind + 1) % _nbLines) == 0):
+			maxLenCol = maxLenColsArr[maxLenColInd]
 			if ind <= len(_data) - 2:
-				for i in range(numLines):
+				for i in range(_nbLines):
 					stdscr.addstr(_y - i, _x + maxLenCol + 1, "|", curses.color_pair(_color) + curses.A_BOLD)
 			_x = _x + maxLenCol + 1
 			_y = baseY + 1
-			maxLenCol = 1
-			#bGuessNumLines = False
+			#_y = _y - (_nbLines - 1)
+			maxLenColInd += 1
 		else:
 			_y += 1 
 
+	# Handling title positionning
+	# defaut upper left title
+	titleX = baseX + 2
+	if _title[:3] == "%C%":
+		_title = _title[3:]
+		titleX = baseX + (totalWidth // 2) - (len(_title) // 2)#ceil(len(_title), 2)
+		if totalWidth % 2 == 0 or len(_title) % 2 != 0:
+			titleX = titleX - 1
+	elif _title[:3] == "%R%":
+		_title = _title[3:]
+		titleX = baseX + totalWidth - len(_title) - 2
+	elif _title[:3] == "%L%":
+		_title = _title[3:]
+
+	# Handling footer positionning
+	# default bottom right
+	footerX = baseX + totalWidth - len(_footer) - 2
+	if _footer[:3] == "%C%":
+		_footer = _footer[3:]
+		footerX = baseX + (totalWidth // 2) - (len(_footer) // 2)#ceil(len(_footer), 2)
+		if totalWidth % 2 == 0 or len(_footer) % 2 != 0:
+			footerX = footerX - 1
+	elif _footer[:3] == "%L%":
+		_footer = _footer[3:]
+		footerX = baseX + 2
+	elif _footer[:3] == "%R%":
+		_footer = _footer[3:]
+		
+
+	# elif _footer[:3] == "%R%":
+	# 	_footer = _footer[3:]
+	# 	footerX = baseX + totalWidth - len(_footer) - 2
 	# Draw frame
 	stdscr.attron(curses.color_pair(_color))
-	rect(stdscr, baseX, baseY, totalWidth, numLines + 1)
+	rect(stdscr, baseX, baseY, totalWidth, _nbLines + 1)
+	#rect(stdscr, _x - totalWidth + maxLenColsArr[maxLenColInd] + 1, _y - , totalWidth, _nbLines + 1)
 	stdscr.attroff(curses.color_pair(_color))
 	# Title
-	stdscr.addstr( baseY, baseX + 2, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD) #curses.A_REVERSE
+	stdscr.addstr( baseY, titleX, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD) #curses.A_REVERSE
 	# Footer
-	stdscr.addstr(baseY + numLines + 1, baseX + totalWidth - len(_footer) - 2, " " + _footer + " ", curses.color_pair(6) + curses.A_BOLD)
+	stdscr.addstr(baseY + _nbLines + 1, footerX, " " + _footer + " ", curses.color_pair(6) + curses.A_BOLD)
+
+
 
 def draw_main(stdscr):
 	
@@ -302,23 +365,11 @@ def draw_main(stdscr):
 				stdscr.addstr(start_y + 6, start_x - blockwidth - 2, "⠀⠀" + datefull + "⠀⠀", curses.A_REVERSE + curses.color_pair(colorDateNum))
 			else:
 				stdscr.addstr(start_y + 4, int(width // 2) - 6, "⠀" + datefullSmall + "⠀", curses.A_REVERSE + curses.color_pair(colorDateNum))	
-	
-		# boxh = curses.newwin(6, 33, 2, 3)
-		# boxh.box();
-		# #rectangle(stdscr, 41,0, 1+5+1, 1+30+1)
-		# boxh.addstr(1, 1, "DU IH D")
-		# boxh.refresh()
-		# stdscr.refresh()
 
 		#Draw Help
 		if isHelp:
-			showHelp(stdscr, "H E L P", "@darokin ♥", helpMenu, ceil(len(helpMenu), 2), -1, -1, colorClockNum)
-
-		#box = Textbox(editwin)
-		# Let the user edit until Ctrl-G is struck.
-		#box.edit()
-		# Get resulting contents
-		#message = box.gather()
+			#showHelp(stdscr, "H E L P", "@darokin ♥", helpMenu, 3, -1, -1, colorClockNum)
+			showHelp(stdscr, helpMenu, -1, -1, "%C%H E L P", "%C%@darokin ♥", 3, 0, colorClockNum)
 
 		# Refresh / Input / Timeout
 		stdscr.refresh()
