@@ -1,6 +1,8 @@
 # darshell-clock
 ASCII rendering of time and date in console
+
 Uses ncurses
+
 Support 2 size of ASCII made blocky digit to support the smallest 
 
  - Hit "h" in the application to have help (these commands)
