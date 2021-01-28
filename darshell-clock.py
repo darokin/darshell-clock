@@ -143,7 +143,7 @@ def draw_main(stdscr):
 	
 	init(stdscr)
 	intColors()
-	
+
 	while True:
 		# Initialization
 		stdscr.clear()
