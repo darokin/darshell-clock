@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import sys,os
+import sys, os
 import curses
-import curses.ascii
+#import curses.ascii
 #from curses.textpad import Textbox, rectangle
 import datetime
 
@@ -48,7 +48,7 @@ isHelp 		= False
 isDateAff 	= True
 colorClockNum = 2
 colorDateNum = 1
-MAX_COLORS = 7
+MAX_COLORS = 0 # set after color init
 
 MIN_WIDTH = 18
 MIN_HEIGHT = 5
@@ -86,9 +86,10 @@ def init(stdscr):
 	stdscr.border(2)
 
 def intColors():
+	global MAX_COLORS
+
 	# Start colors in curses
 	curses.start_color()
-	#curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
 	curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
 	curses.init_pair(2, curses.COLOR_YELLOW, curses.COLOR_BLACK)
 	curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)
@@ -96,19 +97,16 @@ def intColors():
 	curses.init_pair(5, curses.COLOR_BLUE, curses.COLOR_BLACK)
 	curses.init_pair(6, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
 	curses.init_pair(7, curses.COLOR_CYAN, curses.COLOR_BLACK)
-
-	curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK)
-
-
+	MAX_COLORS = 7
+	curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK) # for black bg on box
 
 # Cell do as // but ceil instead of floor, ok for integers
 def ceil(n, d):
     return (n + d - 1) // d
 
-# 
-def rect(win, _px, _py, _w, _h):
-    #Draw a rectangle at X , Y with WITH AND HEIGHT 
-    
+# Draw a rectangle at X , Y with WITH AND HEIGHT
+# ... ncurses as it but i can stend invert x,y and having lower right pos instead of width and height
+def rect(win, _px, _py, _w, _h): 
 	win.vline(_py+1, _px, curses.ACS_VLINE, _h - 1)
 	win.hline(_py, _px+1, curses.ACS_HLINE, _w - 1)
 	win.hline(_py + _h, _px+1, curses.ACS_HLINE, _w - 1)
@@ -118,17 +116,7 @@ def rect(win, _px, _py, _w, _h):
 	win.addch(_py + _h, _px + _w, curses.ACS_LRCORNER)
 	win.addch(_py + _h, _px, curses.ACS_LLCORNER)
 
-
-
-    # win.vline(_py+1, ulx, curses.ACS_VLINE, _w)#lry - uly - 1)
-    # win.hline(uly, ulx+1, curses.ACS_HLINE, lrx - ulx - 1)
-    # win.hline(lry, ulx+1, curses.ACS_HLINE, lrx - ulx - 1)
-    # win.vline(uly+1, lrx, curses.ACS_VLINE, lry - uly - 1)
-    # win.addch(uly, ulx, curses.ACS_ULCORNER)
-    # win.addch(uly, lrx, curses.ACS_URCORNER)
-    # win.addch(lry, lrx, curses.ACS_LRCORNER)
-    # win.addch(lry, ulx, curses.ACS_LLCORNER)
-
+# Clean ending of curses + handling of error message
 def endcurse(stdscr, bError):
 	curses.nocbreak()
 	stdscr.keypad(False)
@@ -139,6 +127,7 @@ def endcurse(stdscr, bError):
 		sys.stdout.write("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render")
 		exit()
 
+# Draw the help box
 def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 	baseY = _y
 	baseX = _x
@@ -159,8 +148,7 @@ def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 		if lineLen > maxLenCol:
 			maxLenCol = lineLen
 		ind = _data.index(vv)
-		#ind += 1
-		# Test sortie
+		# Test exit
 		if ind == (len(_data) - 1):
 			totalWidth = totalWidth + maxLenCol + 1
 			break
@@ -182,29 +170,26 @@ def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 		for xx in range(totalWidth - 1):
 			stdscr.addch(_y + yy + 1, _x + xx + 1, '⠀', curses.color_pair(8))# + curses.A_REVERSE)
 
-	numLines = 0
-	#totalWidth = 0
+#	numLines = 0
 	maxLenCol = 1
 	bGuessNumLines = True
 	ind = 0
 	_y = baseY + 1
 	for vv in _data:
 		# Line size for columns
-		if bGuessNumLines:
-			numLines += 1
-		numLines = _nbLines
+		# if bGuessNumLines:
+		# 	numLines += 1
+		# numLines = _nbLines
 		lineLen = 1 + len(vv[0]) + 1 + len(vv[1]) + 1
 		if lineLen > maxLenCol:
 			maxLenCol = lineLen
 
-		stdscr.addstr(_y, _x + 2, vv[0], curses.color_pair(_color) + curses.A_BOLD) #curses.A_REVERSE
+		stdscr.addstr(_y, _x + 2, vv[0], curses.color_pair(_color) + curses.A_BOLD)
 		stdscr.addstr(_y, _x + 4, vv[1])
 		ind = _data.index(vv)
-		#ind += 1
 
 		# Test exit
 		if ind == (len(_data) - 1):
-			#totalWidth = totalWidth + maxLenCol + 1
 			break
 
 		if ind > 0 and ((ind + 1) % numLines) == 0:
@@ -213,16 +198,14 @@ def showHelp(stdscr, _title, _footer, _data, _nbLines, _x, _y, _color):
 					stdscr.addstr(_y - i, _x + maxLenCol + 1, "|", curses.color_pair(_color) + curses.A_BOLD)
 			_x = _x + maxLenCol + 1
 			_y = baseY + 1
-			#totalWidth = totalWidth + maxLenCol + 1
 			maxLenCol = 1
-			bGuessNumLines = False
+			#bGuessNumLines = False
 		else:
 			_y += 1 
 
 	# Draw frame
 	stdscr.attron(curses.color_pair(_color))
 	rect(stdscr, baseX, baseY, totalWidth, numLines + 1)
-	#rectangle2(stdscr, baseY, baseX, numLines + baseY + 1, 1 + totalWidth + baseX)
 	stdscr.attroff(curses.color_pair(_color))
 	# Title
 	stdscr.addstr( baseY, baseX + 2, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD) #curses.A_REVERSE
