@@ -11,3 +11,6 @@ __pycache__/
 # Environments
 pyvenv.cfg
 
+# VS .env
+.env
+

@@ -1,11 +1,6 @@
-#from . import darshellclock
-##import darshellclock.clock
-
-#from . import clock
-from darshellclock.clock import go
+from main import init
 
 def main():
-    go()
+    init()
 
 main()
-

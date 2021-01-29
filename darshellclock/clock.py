@@ -1,39 +1,23 @@
 #!/usr/bin/env python3
 
 import sys, os
-#import os.path
-#from os import path
 import curses
 #import curses.ascii
 import datetime
 
-# Personal imports
-#from darshellclock.help import help
-#import darshellclock.help
-#from .help import help
-from . import help
-from .help import showHelp
-#from .globals import *
+# Custom imports
+from help import showHelp
+from globals import *
+from utils import get_terminal_size
 
-
-#from . import help
-#from .globals import *
-
-
-
-#from darshellclock.globals import *
-
-#from utils import ceil
-
+# Init global variables
 arrNum 		= arrNumBig
 isBig 		= True
 isHelp 		= False
 isDateAff 	= True
-colorClockNum = 2
-colorDateNum = 1
-
-
-lastKey = ""
+colorClockNum 	= 2
+colorDateNum 	= 1
+#lastKey = ""
 
 def draw_number(num, posx, posy, stdscr):
 	try:
@@ -83,8 +67,8 @@ def endcurse(stdscr, bError):
 	curses.echo()
 	curses.endwin()
 	if bError:
-		print("Application exited")
-		sys.stdout.write("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render")
+		rows, columns = get_terminal_size()
+		sys.stdout.write("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render. Your terminal is [" + str(rows) + "x" + str(columns) + "]. ")
 		exit()
 
 
@@ -136,7 +120,9 @@ def draw_main(stdscr):
 
 		# Centering calculations
 		start_x = int((width // 2) - (blockwidth // 2))
+		# TODO do all this calculation better if possible
 		#start_y = int((height // 2) - 2.5) # 5 bloch high / 2
+		# Weird tweaks sorry...
 		if isDateAff:
 			if isBig:
 				start_y = int((height // 2) - 3)
@@ -150,7 +136,6 @@ def draw_main(stdscr):
 		# ok whatever, must have use ceiled somewhere instead of //
 		if height % 2 == 0 and isBig == False:
 			start_y -= 1
-			
 
 		# Draw TIME
 		stdscr.attron(curses.color_pair(colorClockNum))
@@ -182,13 +167,14 @@ def draw_main(stdscr):
 
 		#Draw Help
 		if isHelp:
-			help.showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH -4) else 1), 0, colorClockNum)
+			showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH -4) else 1), 0, colorClockNum)
 
-		# Refresh / Input / Timeout
+		# Refresh / Timeout
 		stdscr.refresh()
 		key = stdscr.getch()
 		stdscr.timeout(1000)	
 
+		# Key inputs
 		if key == ord("t") or key == ord("t"): #key == curses.KEY_UP:
 			colorClockNum -= 1
 			if colorClockNum == 0:
@@ -219,20 +205,12 @@ def draw_main(stdscr):
 	# Ending
 	endcurse(stdscr, False)
 
-def go():
+def readConfFile():
 	global isDateAff
 	global colorClockNum
 	global colorDateNum
 
-	# Test resolution si mini ok
-	rows, columns = os.popen('stty size', 'r').read().split()
-	if int(rows) < MIN_HEIGHT or int(columns) < MIN_WIDTH:
-		print("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render, your term indicates a [" + rows + "x" + columns + "] resolution ")
-		df = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
-		print("Time : " + df)
-		exit()
-	
-	# Read la config si il y en a une 
+	# Read config file if present 
 	if os.path.exists(CONF_FILEPATH): 
 		with open(CONF_FILEPATH, 'r') as reader:
 			strconf = reader.read()
@@ -241,7 +219,17 @@ def go():
 		colorClockNum 	= int(tabconf[1])
 		colorDateNum 	= int(tabconf[2])
 
+def start():
+	# Test resolution si mini ok
+	#rows, columns = os.popen('stty size', 'r').read().split()
+	rows, columns = get_terminal_size()
+	if int(rows) < MIN_HEIGHT or int(columns) < MIN_WIDTH:
+		print("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render, your term indicates a [" + str(rows) + "x" + str(columns) + "] resolution ")
+		df = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
+		print("Time : " + df)
+		exit()
+	
 	curses.wrapper(draw_main)
 
 if __name__ == "__main__":
-	go()
+	start()
