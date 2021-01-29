@@ -15,3 +15,6 @@ pyvenv.cfg
 # VS .env
 .env
 
+# TODO revoir si nécessaire avec les autres modif et changer aussi settings.json !!
+.vscode/
+
