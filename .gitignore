@@ -1,0 +1,9 @@
+# created by virtualenv automatically
+
+# Generics
+bin/
+lib/
+__pycache__/
+
+# Environments
+pyvenv.cfg

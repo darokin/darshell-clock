@@ -242,10 +242,10 @@ def draw_main(stdscr):
 				colorDateNum = MAX_COLORS
 		elif key == ord('s') or key == ord("S"):
 			isDateAff = not isDateAff
-		#elif key == ord('s'):
-		#	isBig = not isBig
 		elif key == ord('h'):
 			isHelp = not isHelp
+		#elif key == ord('s'):
+		#	isBig = not isBig
 		#elif key == ord('e'):
 		#	lastKey = "e"
 		#elif key == ord('r') and lastKey == "e":
