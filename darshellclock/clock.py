@@ -220,6 +220,9 @@ def readConfFile():
 		colorDateNum 	= int(tabconf[2])
 
 def start():
+	# Read configuration file
+	readConfFile()
+	
 	# Test resolution si mini ok
 	#rows, columns = os.popen('stty size', 'r').read().split()
 	rows, columns = get_terminal_size()

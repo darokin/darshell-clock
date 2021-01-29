@@ -7,6 +7,7 @@ MIN_HEIGHT = 7
 MIN_BIG_WIDTH = 45
 MIN_BIG_HEIGHT = 10
 
+# TODO voir pour stocker ailleurs..
 CONF_FILEPATH = "./darclock.cfg"
 
 # Not a constant, set after color init
