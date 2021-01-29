@@ -1,5 +1,8 @@
 # created by virtualenv automatically
 
+# App conf
+#darclock.cfg
+
 # Generics
 bin/
 lib/
@@ -7,3 +10,4 @@ __pycache__/
 
 # Environments
 pyvenv.cfg
+
