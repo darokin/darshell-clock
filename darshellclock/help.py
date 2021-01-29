@@ -1,5 +1,5 @@
 import curses
-from utils import ceil
+from darshellclock.utils import ceil
 
 # Draw a rectangle at X , Y with WITH AND HEIGHT
 # ... ncurses as it but i can stend invert x,y and having lower right pos instead of width and height

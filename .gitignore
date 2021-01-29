@@ -1,7 +1,7 @@
 # created by virtualenv automatically
 
 # App conf
-#darclock.cfg
+darshellclock/darclock.cfg
 
 # Generics
 bin/

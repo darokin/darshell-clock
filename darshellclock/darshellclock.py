@@ -7,7 +7,13 @@ import curses
 #import curses.ascii
 import datetime
 
-import help
+
+#import help
+from . import help
+
+
+#from darshellclock.globals import *
+
 #from utils import ceil
 
 arrNumBig = [
@@ -65,16 +71,7 @@ isHelp 		= False
 isDateAff 	= True
 colorClockNum = 2
 colorDateNum = 1
-MAX_COLORS = 0 # set after color init
 
-# TODO mettre a 18 en mini mais faire que help tienne dedans
-MIN_WIDTH = 18-2#36#18
-MIN_HEIGHT = 7
-
-MIN_BIG_WIDTH = 45
-MIN_BIG_HEIGHT = 45
-
-CONF_FILEPATH = "./darclock.cfg"
 
 lastKey = ""
 
@@ -150,7 +147,7 @@ def draw_main(stdscr):
 		height, width = stdscr.getmaxyx()
 
 		# Handling sizing depending on term size
-		if width < 45 or height < 10:
+		if width < MIN_BIG_WIDTH or height < MIN_BIG_HEIGHT:
 			isBig = False
 
 		# Quitting if size would make ncurse crash
@@ -225,7 +222,7 @@ def draw_main(stdscr):
 
 		#Draw Help
 		if isHelp:
-			help.showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > 40 else 1), 0, colorClockNum)
+			darshellclock.help.showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > 40 else 1), 0, colorClockNum)
 
 		# Refresh / Input / Timeout
 		stdscr.refresh()
@@ -262,7 +259,7 @@ def draw_main(stdscr):
 	# Ending
 	endcurse(stdscr, False)
 
-def main():
+def go():
 	global isDateAff
 	global colorClockNum
 	global colorDateNum
@@ -287,4 +284,4 @@ def main():
 	curses.wrapper(draw_main)
 
 if __name__ == "__main__":
-	main()
+	go()
