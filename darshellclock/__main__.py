@@ -1,17 +1,11 @@
-from . import darshellclock
+#from . import darshellclock
+##import darshellclock.clock
 
+#from . import clock
+from darshellclock.clock import go
 
 def main():
-    darshellclock.go()
+    go()
 
 main()
 
-# #!/usr/bin/env python3
-
-# from mypackage.myothermodule import add
-
-# def main():
-#     print(add('1', '1'))
-
-# if __name__ == '__main__':
-#     main()

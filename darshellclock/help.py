@@ -1,5 +1,7 @@
 import curses
-from darshellclock.utils import ceil
+#from darshellclock.utils import ceil
+
+import utils
 
 # Draw a rectangle at X , Y with WITH AND HEIGHT
 # ... ncurses as it but i can stend invert x,y and having lower right pos instead of width and height
@@ -129,3 +131,8 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 	# Footer
 	stdscr.addstr(baseY + _nbLines + 1, footerX, " " + _footer + " ", curses.color_pair(6) + curses.A_BOLD)
 
+def debug():
+	print("ok")
+
+if __name__ == "__main__":
+	print("yes")

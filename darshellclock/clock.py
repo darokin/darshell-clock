@@ -7,63 +7,23 @@ import curses
 #import curses.ascii
 import datetime
 
-
-#import help
+# Personal imports
+#from darshellclock.help import help
+#import darshellclock.help
+#from .help import help
 from . import help
+from .help import showHelp
+#from .globals import *
+
+
+#from . import help
+#from .globals import *
+
 
 
 #from darshellclock.globals import *
 
 #from utils import ceil
-
-arrNumBig = [
-		['████████', '██⠀⠀⠀⠀██', '██⠀⠀⠀⠀██', '██⠀⠀⠀⠀██', '████████'],
-		['██', '██', '██', '██', '██'],
-		['████████', '⠀⠀⠀⠀⠀⠀██', '████████', '██      ', '████████'],
-		['████████', '⠀⠀⠀⠀⠀⠀██', '████████', '⠀⠀⠀⠀⠀⠀██', '████████'],
-		['██⠀⠀⠀⠀██', '██⠀⠀⠀⠀██', '████████', '⠀⠀⠀⠀⠀⠀██', '⠀⠀⠀⠀⠀⠀██'],
-		['████████', '██⠀⠀⠀⠀', '████████', '⠀⠀⠀⠀⠀⠀██', '████████'],
-		['████████', '██⠀⠀⠀⠀', '████████', '██⠀⠀⠀⠀██', '████████'],
-		['████████', '⠀⠀⠀⠀⠀⠀██', '⠀⠀⠀⠀⠀⠀██', '⠀⠀⠀⠀⠀⠀██', '⠀⠀⠀⠀⠀⠀██'],
-		['████████', '██⠀⠀⠀⠀██', '████████', '██⠀⠀⠀⠀██', '████████'],
-		['████████', '██⠀⠀⠀⠀██', '████████', '⠀⠀⠀⠀⠀⠀██', '████████'],
-		['⠀⠀⠀', '███', '⠀⠀⠀', '███', '⠀⠀⠀']
-	]
-
-arrNumSmall = [
-		['▄▄▄▄', '█⠀⠀█', '█▄▄█'], 
-		['▄', '█', '█'],
-		['▄▄▄▄', '▄▄▄█', '█▄▄▄'],
-		['▄▄▄▄', '⠀▄▄█', '▄▄▄█'],
-		['▄⠀⠀▄', '█▄▄█', '⠀⠀⠀█'],
-		['▄▄▄▄', '█▄▄▄', '▄▄▄█'],
-		['▄▄▄▄', '█▄▄▄', '█▄▄█'],
-		['▄▄▄▄', '⠀⠀⠀█', '⠀⠀⠀█'],
-		['▄▄▄▄', '█▄▄█', '█▄▄█'],
-		['▄▄▄▄', '█▄▄█', '▄▄▄█'],
-		['⠀', '■', '▀']
-	]
-
-helpMenu = (
-	("H", "Show/Hise help"), 
-	("S", "Show/Hide date"),
-	("Q", "Quit"),
-	("C", "Date color"),
-	("T", "Time color")
-)
-
-# helpMenu = (
-# 	("H", "kjep"), 
-# 	("S", " date"),
-# 	("Q", "Quit"),
-# 	("C", "Date r"),
-# 	("T", "Time or"),
-# 	("f", "Shgg sdfsad fsdHigp"), 
-# 	("d", "Shate"),
-# 	("g", "Qgit"),
-# 	("s", "Dateaor"),
-# 	("g", "Tlojh")
-# )
 
 arrNum 		= arrNumBig
 isBig 		= True
@@ -222,7 +182,7 @@ def draw_main(stdscr):
 
 		#Draw Help
 		if isHelp:
-			darshellclock.help.showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > 40 else 1), 0, colorClockNum)
+			help.showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH -4) else 1), 0, colorClockNum)
 
 		# Refresh / Input / Timeout
 		stdscr.refresh()
