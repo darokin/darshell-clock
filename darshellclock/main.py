@@ -1,9 +1,9 @@
 import datetime
 import argparse
 
-from utils import get_terminal_size
-from globals import MIN_HEIGHT, MIN_WIDTH
-from clock import start
+from .utils import get_terminal_size
+from .globals import MIN_HEIGHT, MIN_WIDTH
+from .clock import start
 
 class CapitalisedHelpFormatter(argparse.HelpFormatter):
     def add_usage(self, usage, actions, groups, prefix=None):

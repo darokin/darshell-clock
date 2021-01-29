@@ -18,3 +18,5 @@ pyvenv.cfg
 # TODO revoir si nécessaire avec les autres modif et changer aussi settings.json !!
 .vscode/
 
+# debug main for vscode quicklaunch
+debugmain.py

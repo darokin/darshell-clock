@@ -1,4 +1,4 @@
-from main import init
+from darshellclock.main import init
 
 def main():
     init()

@@ -6,9 +6,9 @@ import curses
 import datetime
 
 # Custom imports
-from help import showHelp
-from globals import *
-from utils import get_terminal_size
+from .help import showHelp
+from .globals import *
+from .utils import get_terminal_size
 
 # Init global variables
 arrNum 		= arrNumBig
@@ -222,7 +222,7 @@ def readConfFile():
 def start():
 	# Read configuration file
 	readConfFile()
-	
+
 	# Test resolution si mini ok
 	#rows, columns = os.popen('stty size', 'r').read().split()
 	rows, columns = get_terminal_size()

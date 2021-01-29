@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: darshellclock
+Version: 0.0.2
+Summary: Terminal ASCII clock
+Home-page: https://github.com/darokin/darshellclock
+Author: Adrien Rebuzzi
+Author-email: darokin42@gmail.com
+License: UNKNOWN
+Description: # darshell-clock
+        ASCII rendering of time and date in console
+        
+        Uses ncurses
+        
+        Support 2 size of ASCII made blocky digit to support the smallest 
+        
+         - Hit "h" in the application to have help (these commands)
+         - Hit "q" to quit
+        
+         - Hit "t" to change time color
+         - Hit "d" to change date color
+         - Hit "s" to hide the date
+         
+        Done in 2021 by darokin
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
