@@ -12,7 +12,7 @@ setuptools.setup(
     description="Terminal ASCII clock",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/darokin/darshellclock",
+    url="https://github.com/darokin/darshell-clock",
     #packages=setuptools.find_packages(),
     packages=['darshellclock'],
     classifiers=[
