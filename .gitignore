@@ -8,8 +8,10 @@ darclock.cfg
 bin/
 lib/
 __pycache__/
+darshellclock/__pycache__/
 dist/
 darshellclock.egg-info/
+TODO.md
 
 # Environments
 pyvenv.cfg

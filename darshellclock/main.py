@@ -38,4 +38,3 @@ def init():
 
 	# All is good, launching clock
 	start()
-	

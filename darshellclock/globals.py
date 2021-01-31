@@ -4,7 +4,7 @@
 MIN_WIDTH = 18-2#36#18
 MIN_HEIGHT = 7
 
-MIN_BIG_WIDTH = 45
+MIN_BIG_WIDTH = 37
 MIN_BIG_HEIGHT = 10
 
 # TODO voir pour stocker ailleurs..
@@ -47,10 +47,11 @@ arrNumSmall = [
 # Help menu
 helpMenu = (
 	("H", "Show/Hise help"), 
-	("S", "Show/Hide date"),
-	("Q", "Quit"),
-	("C", "Date color"),
-	("T", "Time color")
+	("D", "Show/Hide date"),
+	("S", "Show/Hide secs"),
+	("Z", "Time color"),
+	("X", "Date color"),
+	("Q", "Quit")
 )
 
 # helpMenu = (
