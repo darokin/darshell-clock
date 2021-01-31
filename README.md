@@ -79,12 +79,11 @@ $ python -m main.py
 
 ### TODO
 
-- Test localisation
-- Test multiplatform
-- Add an argument to auto close after a few second
-- Not too many more functionnality
-- Maybe some dirty stuff to clean up...
-
+- [x] Test localisation
+- [ ] Test multiplatform
+- [ ] Add an argument to auto close after a few second
+- [ ] Not too many more functionnality
+- [ ] Maybe some dirty stuff to clean up...
 - look at the problem of installing forcing to put --user, otherwise...
 
 ```
