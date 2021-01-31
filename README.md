@@ -49,13 +49,12 @@ While in the app, use these keys to change the configuration :
  
 ## Installing and starting
 
-Use Python 3.x
+Use Python >=3.6
 
 Install using pip:
-### NOT DEPLOYED YET
 ```bash
- pip3 install darshellclock 	#installing (fail bust v1.0.0 is on the way)
- darshellclock					#lauching
+ pip install darshellclock 	#installing
+ darshellclock			#lauching
 ```
 Or if you want to do it manually you can clone or downlad and extract the project:
 
