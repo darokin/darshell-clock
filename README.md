@@ -5,8 +5,9 @@ ASCII why not
 ```                                              
 
 ![Python application](https://github.com/darokin/darshell-clock/workflows/Python%20application/badge.svg)
-[![Build Status](https://travis-ci.com/darokin/darshell_clock.svg?branch=master)](https://travis-ci.com/daeokin/darshell-clock)
+[![Build Status](https://travis-ci.com/darokin/darshell-clock.svg?branch=master)](https://travis-ci.com/darokin/darshell-clock)
 ![GitHub last commit](https://img.shields.io/github/last-commit/darokin/darshell-clock)
+![Github last version](https://img.shields.io/github/v/release/darokin/darshell-clock?include_prereleases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **darshellclock** is a console application to displasy time and date with nice ASCII digits in your terminal.
