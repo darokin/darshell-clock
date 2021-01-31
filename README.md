@@ -4,8 +4,10 @@
 ASCII why not
 ```                                              
 
-[![Build Status](https://travis-ci.com/darokin/darshell_clock.svg?branch=master)](https://travis-ci.com/daeokin/darshell-clock)
+![Python application](https://github.com/darokin/darshell-clock/workflows/Python%20application/badge.svg)
+[![Build Status](https://travis-ci.com/darokin/darshell-clock.svg?branch=master)](https://travis-ci.com/darokin/darshell-clock)
 ![GitHub last commit](https://img.shields.io/github/last-commit/darokin/darshell-clock)
+![Github last version](https://img.shields.io/github/v/release/darokin/darshell-clock?include_prereleases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **darshellclock** is a *MINIMALIST* console application to displasy time and date with nice ASCII digits in your terminal.
@@ -73,5 +75,53 @@ $ cd darshell-clock
 $ python3 darshellclock           # to launch/test
 $ python3 setup.py install --user # to install
 ```
+<<<<<<< HEAD
+=======
+To start the application:
+```bash
+$ darshellclock
+$ python -m main.py
+```
+
+### TODO
+
+- [x] Test localisation
+- [ ] Test multiplatform
+- [ ] Add an argument to auto close after a few second
+- [ ] Not too many more functionnality
+- [ ] Maybe some dirty stuff to clean up...
+- look at the problem of installing forcing to put --user, otherwise...
+
+```
+darokin@darokin-AERO-15XV8:~/code/python3/darshell-clock_test$ python3 setup.py install
+running install
+error: can't create or remove files in install directory
+
+The following error occurred while trying to add or remove files in the
+installation directory:
+
+    [Errno 13] Permission denied: '/usr/local/lib/python3.6/dist-packages/test-easy-install-7506.write-test'
+
+The installation directory you specified (via --install-dir, --prefix, or
+the distutils default setting) was:
+
+    /usr/local/lib/python3.6/dist-packages/
+
+Perhaps your account does not have write access to this directory?  If the
+installation directory is a system-owned directory, you may need to sign in
+as the administrator or "root" account.  If you do not have administrative
+access to this machine, you may wish to choose a different installation
+directory, preferably one that is listed in your PYTHONPATH environment
+variable.
+
+For information on other options, you may wish to consult the
+documentation at:
+
+  https://setuptools.readthedocs.io/en/latest/easy_install.html
+
+Please make the appropriate changes for your system and try again.
+```
+
+>>>>>>> b18902c106c8d4c4b8cde8eaf47081b079f2051d
 If you encounter any problem or have any suggestions, please [open an issue](https://github.com/darokin/darshell-clock/issues/new) or [send a pull request](https://github.com/darokin/darshell-clock/pulls).
 
