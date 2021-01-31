@@ -4,6 +4,7 @@
 ASCII why not
 ```                                              
 
+![Python application](https://github.com/darokin/darshell-clock/workflows/Python%20application/badge.svg)
 [![Build Status](https://travis-ci.com/darokin/darshell_clock.svg?branch=master)](https://travis-ci.com/daeokin/darshell-clock)
 ![GitHub last commit](https://img.shields.io/github/last-commit/darokin/darshell-clock)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
