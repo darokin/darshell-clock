@@ -1,9 +1,5 @@
 # darshell-clock
 
-```
-ASCII why not
-```                                              
-
 ![Python application](https://github.com/darokin/darshell-clock/workflows/Python%20application/badge.svg)
 [![Build Status](https://travis-ci.com/darokin/darshell-clock.svg?branch=master)](https://travis-ci.com/darokin/darshell-clock)
 ![GitHub last commit](https://img.shields.io/github/last-commit/darokin/darshell-clock)
