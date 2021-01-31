@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="darshellclock",
-    version="0.0.2",
+    version="1.0.0",
     python_requires='>=3.6.0',
     author="Adrien Rebuzzi",
     author_email="darokin42@gmail.com",
