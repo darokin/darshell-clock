@@ -1,7 +1,5 @@
 language: python
 python:
-  - "3.4"
-  - "3.5"
   - "3.6"      # current default Python on Travis CI
   - "3.7"
   - "3.8"
@@ -12,6 +10,8 @@ install:
   - pip install flake8
   - pip3 install .
 before_script:
-  - flake8 .
+# ignore W191 (tabs instead of spacese)
+# ignore E501 (lines > 80 char)
+  - flake8 --extend-ignore=W191,E501 .
 script:
   - pytest
