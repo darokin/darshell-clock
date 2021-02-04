@@ -15,7 +15,7 @@ class CapitalisedHelpFormatter(argparse.HelpFormatter):
 
 
 def init():
-	# Argument parsing 
+	# Argument parsing
 	parser = argparse.ArgumentParser(description="In the app, use Q to quit and H to see how to change colors and settings.", add_help=False, formatter_class=CapitalisedHelpFormatter)
 	parser._positionals.title = 'Positional arguments'
 	parser._optionals.title = 'Optional arguments'
@@ -24,11 +24,11 @@ def init():
 	parser.add_argument("-i", "--info", action="store_true")
 	args = parser.parse_args()
 
-	#_VersionAction(option_strings=['-v', '--version'], dest='version', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help="Show program's version number and exit.", metavar=None)
-	#_HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help='Q to QUIT / H for HELP box in app', metavar=None)
+	# _VersionAction(option_strings=['-v', '--version'], dest='version', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help="Show program's version number and exit.", metavar=None)
+	# _HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help='Q to QUIT / H for HELP box in app', metavar=None)
 
 	if args.info:
-		print("Todo .nfo display...")
+		print("Todo .nfo display...sorry no info yet")
 		exit()
 
 	rows, columns = get_terminal_size()

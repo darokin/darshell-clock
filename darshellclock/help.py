@@ -1,5 +1,5 @@
 import curses
-#from darshellclock.utils import ceil
+# from darshellclock.utils import ceil
 
 from .utils import ceil
 
@@ -76,7 +76,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 		# Test exit
 		if ind == (len(_data) - 1):
 			break
-		
+
 		# End of line
 		if ind > 0 and (((ind + 1) % _nbLines) == 0):
 			maxLenCol = maxLenColsArr[maxLenColInd]
@@ -85,7 +85,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 					stdscr.addch(_y - i, _x + maxLenCol + 1, curses.ACS_VLINE, curses.color_pair(_color) + curses.A_BOLD)
 			_x = _x + maxLenCol + 1
 			_y = baseY + 1
-			#_y = _y - (_nbLines - 1)
+			# _y = _y - (_nbLines - 1)
 			maxLenColInd += 1
 		else:
 			_y += 1
@@ -95,7 +95,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 	titleX = baseX + 2
 	if _title[:3] == "%C%":
 		_title = _title[3:]
-		titleX = baseX + (totalWidth // 2) - (len(_title) // 2)#ceil(len(_title), 2)
+		titleX = baseX + (totalWidth // 2) - (len(_title) // 2)  # ceil(len(_title), 2)
 		if totalWidth % 2 == 0 or len(_title) % 2 != 0:
 			titleX = titleX - 1
 	elif _title[:3] == "%R%":
@@ -108,7 +108,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 	# default bottom right
 	if _footer[:3] == "%C%":
 		_footer = _footer[3:]
-		footerX = baseX + (totalWidth // 2) - (len(_footer) // 2)#ceil(len(_footer), 2)
+		footerX = baseX + (totalWidth // 2) - (len(_footer) // 2) #  ceil(len(_footer), 2)
 		if totalWidth % 2 == 0 or len(_footer) % 2 != 0:
 			footerX = footerX - 1
 	elif _footer[:3] == "%L%":
@@ -124,9 +124,9 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 	# Draw frame
 	stdscr.attron(curses.color_pair(_color))
 	rect(stdscr, baseX, baseY, totalWidth, _nbLines + 1)
-	#rect(stdscr, _x - totalWidth + maxLenColsArr[maxLenColInd] + 1, _y - , totalWidth, _nbLines + 1)
+	# rect(stdscr, _x - totalWidth + maxLenColsArr[maxLenColInd] + 1, _y - , totalWidth, _nbLines + 1)
 	stdscr.attroff(curses.color_pair(_color))
 	# Title
-	stdscr.addstr( baseY, titleX, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD) #curses.A_REVERSE
+	stdscr.addstr(baseY, titleX, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD)  # curses.A_REVERSE
 	# Footer
 	stdscr.addstr(baseY + _nbLines + 1, footerX, " " + _footer + " ", curses.color_pair(6) + curses.A_BOLD)

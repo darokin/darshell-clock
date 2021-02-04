@@ -2,25 +2,32 @@
 
 # Custom imports
 from .help import showHelp
-from .globals import *
+from .globals import (
+	MIN_WIDTH, MIN_HEIGHT,
+	MIN_BIG_WIDTH, MIN_BIG_HEIGHT,
+	CONF_FILEPATH,
+	MAX_COLORS,
+	arrNumBig, arrNumSmall,
+	helpMenu
+)
 from .utils import get_terminal_size
 
 # External imports
 import sys, os
 import curses
-#import curses.ascii
+# import curses.ascii
 import datetime
 import locale
 
 # Init global variables
-arrNum 		= arrNumBig
-isBig 		= True
-isHelp 		= False
-isDateAff 	= True
-isSecsAff	= False
-colorClockNum 	= 1
-colorDateNum 	= 6
-#lastKey = ""
+arrNum = arrNumBig
+isBig = True
+isHelp = False
+isDateAff = True
+isSecsAff = False
+colorClockNum = 1
+colorDateNum = 6
+# lastKey = ""
 
 def draw_number(num, posx, posy, stdscr):
 	for row in arrNum[num]:
@@ -39,7 +46,7 @@ def draw_number(num, posx, posy, stdscr):
 def init(stdscr):
 	# Clear and refresh the screen for a blank canvas
 	stdscr.clear()
-	#curses.init_color(0, 123, 0, 43)
+	# curses.init_color(0, 123, 0, 43)
 	# TODO bg color in conf file 
 	stdscr.refresh()
 
@@ -58,7 +65,7 @@ def intColors():
 	# Start colors in curses
 	curses.start_color()
 	curses.use_default_colors()
-	#-1 instead of curses.COLOR_BLACK for BG to use term default BG
+	# -1 instead of curses.COLOR_BLACK for BG to use term default BG
 	curses.init_pair(1, curses.COLOR_WHITE, -1)
 	curses.init_pair(2, curses.COLOR_YELLOW, -1)
 	curses.init_pair(3, curses.COLOR_RED, -1)
@@ -111,7 +118,7 @@ def draw_main(stdscr):
 			endcurse(stdscr, True)
 
 		# Debug
-		#stdscr.addstr(0, 0, " " + str(width) + " x " + str(height))
+		# stdscr.addstr(0, 0, " " + str(width) + " x " + str(height))
 
 		# Get hours and minutes
 		locale.getlocale()
@@ -120,13 +127,13 @@ def draw_main(stdscr):
 		# datefull = now.strftime('%d / %m / %Y')
 
 		datefullSmall = now.strftime('%x')
-		datefull = " - ".join(datefullSmall.split("-"))	# Add extra spacing on date to for 'neating'
+		datefull = " - ".join(datefullSmall.split("-"))	 # Add extra spacing on date to for 'neating'
 		datefull = " / ".join(datefullSmall.split("/"))
-		hoursmin = now.strftime('%H%M%S') # %X pour locale TIME format
+		hoursmin = now.strftime('%H%M%S')  # %X pour locale TIME format
 		seconds = hoursmin[-2:]
 		hoursmin = hoursmin[:4]
 		# TODO localisation du TIME T_FTM , see locale etc.  if other char than ":", will there be AM/PM ?
-		#hoursmin = "".join([char for char in hoursmin if char in '1234567890'])
+		# hoursmin = "".join([char for char in hoursmin if char in '1234567890'])
 
 		# Select size of block BIG or SMALL
 		arrNum = arrNumBig if isBig else arrNumSmall
@@ -141,7 +148,7 @@ def draw_main(stdscr):
 
 		# Centering calculations
 		start_x = int((width // 2) - (blockwidth // 2))
-		start_y = int((height // 2) - (len(arrNum[0]) // 2))# - (1 if isBig else 0)
+		start_y = int((height // 2) - (len(arrNum[0]) // 2))  # - (1 if isBig else 0)
 		if isBig and (isDateAff or isSecsAff):
 			start_y = start_y - 1
 
@@ -159,7 +166,7 @@ def draw_main(stdscr):
 				start_x += len(arrNum[10][0])
 				start_x = start_x + 2 if isBig else start_x + 1
 		stdscr.attroff(curses.color_pair(colorClockNum))
-		stdscr.attroff(curses.A_BOLD)	
+		stdscr.attroff(curses.A_BOLD)
 
 		# Draw SECONDS
 		if isSecsAff:
@@ -168,7 +175,7 @@ def draw_main(stdscr):
 					stdscr.addstr(start_y + 6, start_x - 5, " ".join(list(seconds)), curses.color_pair(colorClockNum))
 				else:
 					stdscr.addstr(start_y + 6, start_x - 5, " ".join(list(seconds)), curses.color_pair(colorClockNum))
-			else: 
+			else:
 				stdscr.addstr(start_y + 3, start_x - 3, seconds, curses.color_pair(colorClockNum))
 
 		#Draw DATE
@@ -180,7 +187,7 @@ def draw_main(stdscr):
 				else:
 					stdscr.addstr(start_y + 6, start_x - len(datefull) - 6, "⠀⠀" + datefull + "⠀⠀", curses.A_REVERSE + curses.color_pair(colorDateNum))
 			else:
-				stdscr.addstr(start_y + 4, start_x - len(datefullSmall) - 3, "⠀" + datefullSmall + "⠀", curses.A_REVERSE + curses.color_pair(colorDateNum))	
+				stdscr.addstr(start_y + 4, start_x - len(datefullSmall) - 3, "⠀" + datefullSmall + "⠀", curses.A_REVERSE + curses.color_pair(colorDateNum))
 
 		#Draw Help
 		if isHelp:
@@ -189,14 +196,14 @@ def draw_main(stdscr):
 		# Refresh / Timeout
 		stdscr.refresh()
 		key = stdscr.getch()
-		stdscr.timeout(1000)	
+		stdscr.timeout(1000)
 
 		# Key inputs
-		if key == ord("z") or key == ord("Z"): #key == curses.KEY_UP:
+		if key == ord("z") or key == ord("Z"):  # key == curses.KEY_UP:
 			colorClockNum -= 1
 			if colorClockNum == 0:
 				colorClockNum = MAX_COLORS
-		elif key == ord("x") or key == ord("X"): #curses.KEY_LEFT:
+		elif key == ord("x") or key == ord("X"):  # curses.KEY_LEFT:
 			colorDateNum -= 1
 			if colorDateNum == 0:
 				colorDateNum = MAX_COLORS
@@ -206,11 +213,11 @@ def draw_main(stdscr):
 			isSecsAff = not isSecsAff
 		elif key == ord('h'):
 			isHelp = not isHelp
-		#elif key == ord('s'):
+		# elif key == ord('s'):
 		#	isBig = not isBig
-		#elif key == ord('e'):
+		# elif key == ord('e'):
 		#	lastKey = "e"
-		#elif key == ord('r') and lastKey == "e":
+		# elif key == ord('r') and lastKey == "e":
 		#	os.system("shutdown now")
 		elif key == ord('q') or key == ord("Q"):
 			break
@@ -230,12 +237,12 @@ def readConfFile():
 	global colorClockNum
 	global colorDateNum
 
-	# Read config file if present 
-	if os.path.exists(CONF_FILEPATH): 
+	# Read config file if present
+	if os.path.exists(CONF_FILEPATH):
 		with open(CONF_FILEPATH, 'r') as reader:
 			strconf = reader.read()
 		tabconf = strconf.split(";")
-		isDateAff = (int(tabconf[0]) == 1) #True
+		isDateAff = (int(tabconf[0]) == 1)  # True
 		colorClockNum = int(tabconf[1])
 		colorDateNum = int(tabconf[2])
 
@@ -245,10 +252,10 @@ def start():
 	readConfFile()
 
 	# Test resolution si mini ok
-	#rows, columns = os.popen('stty size', 'r').read().split()
+	# rows, columns = os.popen('stty size', 'r').read().split()
 	rows, columns = get_terminal_size()
 	if int(rows) < MIN_HEIGHT or int(columns) < MIN_WIDTH:
-		print("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render, your term indicates a [" + str(rows) + "x" + str(columns) + "] resolution ")
+		print("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render, your term indicates a [" + str(rows) + "x" + str(columns) + "] resolution")
 		df = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
 		print("Time : " + df)
 		exit()

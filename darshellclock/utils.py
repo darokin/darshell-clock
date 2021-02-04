@@ -1,5 +1,6 @@
 # Utility functions
-import os, sys
+import os
+import sys
 from .globals import MIN_BIG_WIDTH, MIN_BIG_HEIGHT
 
 
@@ -36,7 +37,7 @@ def _get_terminal_size_windows():
          *_) = struct.unpack("hhhhHhhhhhh", csbi.raw)
         sizex = right - left + 1
         sizey = bottom - top + 1
-    else:                                                      # can't determine actual size 
+    else:                                                      # can't determine actual size
         sizex, sizey = MIN_BIG_WIDTH + 4, MIN_BIG_HEIGHT + 4   # 80 x 25 for VT100 standard i guess
     return (sizey, sizex)
 
