@@ -1,3 +1,0 @@
-[console_scripts]
-darshellclock = darshellclock.__main__:main
-
