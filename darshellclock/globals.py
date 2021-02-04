@@ -1,7 +1,7 @@
 # List of main constants
 
 # TODO mettre a 18 en mini mais faire que help tienne dedans
-MIN_WIDTH = 18-2#36#18
+MIN_WIDTH = 18-2  #36#18
 MIN_HEIGHT = 7
 
 MIN_BIG_WIDTH = 37
@@ -31,7 +31,7 @@ arrNumBig = [
 
 # SMALL ASCII DIGITS
 arrNumSmall = [
-		['▄▄▄▄', '█⠀⠀█', '█▄▄█'], 
+		['▄▄▄▄', '█⠀⠀█', '█▄▄█'],
 		['▄', '█', '█'],
 		['▄▄▄▄', '▄▄▄█', '█▄▄▄'],
 		['▄▄▄▄', '⠀▄▄█', '▄▄▄█'],
@@ -46,7 +46,7 @@ arrNumSmall = [
 
 # Help menu
 helpMenu = (
-	("H", "Show/Hise help"), 
+	("H", "Show/Hise help"),
 	("D", "Show/Hide date"),
 	("S", "Show/Hide secs"),
 	("Z", "Time color"),
@@ -55,12 +55,12 @@ helpMenu = (
 )
 
 # helpMenu = (
-# 	("H", "kjep"), 
+# 	("H", "kjep"),
 # 	("S", " date"),
 # 	("Q", "Quit"),
 # 	("C", "Date r"),
 # 	("T", "Time or"),
-# 	("f", "Shgg sdfsad fsdHigp"), 
+# 	("f", "Shgg sdfsad fsdHigp"),
 # 	("d", "Shate"),
 # 	("g", "Qgit"),
 # 	("s", "Dateaor"),

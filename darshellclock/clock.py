@@ -23,14 +23,18 @@ colorDateNum 	= 6
 #lastKey = ""
 
 def draw_number(num, posx, posy, stdscr):
-	try:
-		for row in arrNum[num]:
-			stdscr.move(posy, posx)
-			stdscr.addstr(row)
-			posy = posy + 1
-	except:
-		endcurse(stdscr, True)
-		exit()
+	for row in arrNum[num]:
+		stdscr.move(posy, posx)
+		stdscr.addstr(row)
+		posy = posy + 1
+	# try:
+	# 	for row in arrNum[num]:
+	# 		stdscr.move(posy, posx)
+	# 		stdscr.addstr(row)
+	# 		posy = posy + 1
+	# except:
+	# 	endcurse(stdscr, True)
+	# 	exit()
 
 def init(stdscr):
 	# Clear and refresh the screen for a blank canvas
@@ -43,9 +47,10 @@ def init(stdscr):
 	curses.noecho()
 	curses.cbreak()
 	stdscr.nodelay(1)
-	stdscr.keypad(1) 
+	stdscr.keypad(1)
 	curses.curs_set(False)
 	stdscr.border(2)
+
 
 def intColors():
 	global MAX_COLORS
@@ -53,15 +58,18 @@ def intColors():
 	# Start colors in curses
 	curses.start_color()
 	curses.use_default_colors()
-	curses.init_pair(1, curses.COLOR_WHITE, -1) #curses.COLOR_BLACK)
-	curses.init_pair(2, curses.COLOR_YELLOW, -1) #, curses.COLOR_BLACK)
-	curses.init_pair(3, curses.COLOR_RED, -1) #, curses.COLOR_BLACK)
-	curses.init_pair(4, curses.COLOR_GREEN, -1) #, curses.COLOR_BLACK)
-	curses.init_pair(5, curses.COLOR_BLUE, -1) #, curses.COLOR_BLACK)
-	curses.init_pair(6, curses.COLOR_MAGENTA, -1) #, curses.COLOR_BLACK)
-	curses.init_pair(7, curses.COLOR_CYAN, -1) #, curses.COLOR_BLACK)
+	#-1 instead of curses.COLOR_BLACK for BG to use term default BG
+	curses.init_pair(1, curses.COLOR_WHITE, -1)
+	curses.init_pair(2, curses.COLOR_YELLOW, -1)
+	curses.init_pair(3, curses.COLOR_RED, -1)
+	curses.init_pair(4, curses.COLOR_GREEN, -1)
+	curses.init_pair(5, curses.COLOR_BLUE, -1)
+	curses.init_pair(6, curses.COLOR_MAGENTA, -1)
+	curses.init_pair(7, curses.COLOR_CYAN, -1)
 	MAX_COLORS = 7
-	curses.init_pair(8, -1, -1) #curses.COLOR_BLACK, curses.COLOR_BLACK) # for black bg on box
+	# for black bg on box
+	curses.init_pair(8, -1, -1)
+
 
 # Clean ending of curses + handling of error message
 def endcurse(stdscr, bError):
@@ -73,6 +81,7 @@ def endcurse(stdscr, bError):
 		rows, columns = get_terminal_size()
 		sys.stdout.write("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render. Your terminal is [" + str(rows) + "x" + str(columns) + "]. ")
 		exit()
+
 
 def draw_main(stdscr):
 	
@@ -215,6 +224,7 @@ def draw_main(stdscr):
 	# Ending
 	endcurse(stdscr, False)
 
+
 def readConfFile():
 	global isDateAff
 	global colorClockNum
@@ -228,6 +238,7 @@ def readConfFile():
 		isDateAff = (int(tabconf[0]) == 1) #True
 		colorClockNum = int(tabconf[1])
 		colorDateNum = int(tabconf[2])
+
 
 def start():
 	# Read configuration file
@@ -243,4 +254,3 @@ def start():
 		exit()
 	
 	curses.wrapper(draw_main)
-

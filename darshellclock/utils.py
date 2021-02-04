@@ -2,9 +2,11 @@
 import os, sys
 from .globals import MIN_BIG_WIDTH, MIN_BIG_HEIGHT
 
+
 # Cell do as // but ceil instead of floor, ok for integers
 def ceil(n, d):
     return (n + d - 1) // d
+
 
 # TODO check sur windows que curses donne bien les coord maj car j'utilise encore la fonction classique
 # Get Terminal size for windows
@@ -37,6 +39,7 @@ def _get_terminal_size_windows():
     else:                                                      # can't determine actual size 
         sizex, sizey = MIN_BIG_WIDTH + 4, MIN_BIG_HEIGHT + 4   # 80 x 25 for VT100 standard i guess
     return (sizey, sizex)
+
 
 def _get_terminal_size_unix():
     return tuple(int(i) for i in os.popen('stty size', 'r').read().split())
