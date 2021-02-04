@@ -108,7 +108,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _nbLines, _color):
 	# default bottom right
 	if _footer[:3] == "%C%":
 		_footer = _footer[3:]
-		footerX = baseX + (totalWidth // 2) - (len(_footer) // 2) #  ceil(len(_footer), 2)
+		footerX = baseX + (totalWidth // 2) - (len(_footer) // 2)  # ceil(len(_footer), 2)
 		if totalWidth % 2 == 0 or len(_footer) % 2 != 0:
 			footerX = footerX - 1
 	elif _footer[:3] == "%L%":

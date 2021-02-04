@@ -13,7 +13,8 @@ from .globals import (
 from .utils import get_terminal_size
 
 # External imports
-import sys, os
+import sys
+import os
 import curses
 # import curses.ascii
 import datetime
@@ -29,6 +30,7 @@ colorClockNum = 1
 colorDateNum = 6
 # lastKey = ""
 
+
 def draw_number(num, posx, posy, stdscr):
 	for row in arrNum[num]:
 		stdscr.move(posy, posx)
@@ -43,11 +45,12 @@ def draw_number(num, posx, posy, stdscr):
 	# 	endcurse(stdscr, True)
 	# 	exit()
 
+
 def init(stdscr):
 	# Clear and refresh the screen for a blank canvas
 	stdscr.clear()
 	# curses.init_color(0, 123, 0, 43)
-	# TODO bg color in conf file 
+	# TODO bg color in conf file
 	stdscr.refresh()
 
 	# Turn of echo ok keypress / nodelay getch / no cursor etc.
@@ -91,7 +94,7 @@ def endcurse(stdscr, bError):
 
 
 def draw_main(stdscr):
-	
+
 	global isBig
 	global isHelp
 	global isDateAff
@@ -100,7 +103,7 @@ def draw_main(stdscr):
 	global colorDateNum
 	global lastKey
 	global arrNum
-	
+
 	init(stdscr)
 	intColors()
 
@@ -142,8 +145,8 @@ def draw_main(stdscr):
 		blockwidth = 0
 		for i in range(len(hoursmin)):
 			blockwidth += len(arrNum[int(hoursmin[i])][0])
-			blockwidth = blockwidth + 2 if isBig else blockwidth + 1	
-		# Remove extra spacing and Add size of : 
+			blockwidth = blockwidth + 2 if isBig else blockwidth + 1
+		# Remove extra spacing and Add size of :
 		blockwidth = blockwidth - 2 + 5 if isBig else blockwidth - 1
 
 		# Centering calculations
@@ -178,7 +181,7 @@ def draw_main(stdscr):
 			else:
 				stdscr.addstr(start_y + 3, start_x - 3, seconds, curses.color_pair(colorClockNum))
 
-		#Draw DATE
+		# Draw DATE
 		stdscr.attroff(curses.A_BOLD)
 		if isDateAff:
 			if isBig:
@@ -189,9 +192,9 @@ def draw_main(stdscr):
 			else:
 				stdscr.addstr(start_y + 4, start_x - len(datefullSmall) - 3, "⠀" + datefullSmall + "⠀", curses.A_REVERSE + curses.color_pair(colorDateNum))
 
-		#Draw Help
+		# Draw Help
 		if isHelp:
-			showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH -4) else 1), 0, colorClockNum)
+			showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH - 4) else 1), 0, colorClockNum)
 
 		# Refresh / Timeout
 		stdscr.refresh()
@@ -214,11 +217,11 @@ def draw_main(stdscr):
 		elif key == ord('h'):
 			isHelp = not isHelp
 		# elif key == ord('s'):
-		#	isBig = not isBig
+		# 	isBig = not isBig
 		# elif key == ord('e'):
-		#	lastKey = "e"
+		# 	lastKey = "e"
 		# elif key == ord('r') and lastKey == "e":
-		#	os.system("shutdown now")
+		# 	os.system("shutdown now")
 		elif key == ord('q') or key == ord("Q"):
 			break
 		else:
@@ -259,5 +262,5 @@ def start():
 		df = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
 		print("Time : " + df)
 		exit()
-	
+
 	curses.wrapper(draw_main)

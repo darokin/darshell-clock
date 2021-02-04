@@ -6,11 +6,11 @@
 ![Github last version](https://img.shields.io/github/v/release/darokin/darshell-clock?include_prereleases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-**darshellclock** is a *MINIMALIST* console application to displasy time and date with nice ASCII digits in your terminal.
+**darshellclock** is a *MINIMALIST* console application to display time and date with nice ASCII digits in your terminal.
 
 Uses ncurses
 
-Here is a demo but mostly you would use this in a small persistent terminal.
+Here is a demo but mostly you would use this in a small persistant terminal.
 
 <p align="center"><img src="http://darokin.info/imgs/darshellclock.gif" alt="darshellclock demo"/></p>
 
@@ -49,7 +49,7 @@ While in the app, use these keys to change the configuration :
  
 ## Installing and starting
 
-Use Python >=3.6
+Use Python 3.x
 
 Install using pip:
 ```bash
