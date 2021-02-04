@@ -5,11 +5,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="darshellclock",
-    version="1.0.0",
+    version="1.0.1",
     python_requires='>=3.6.0',
-    author="Adrien Rebuzzi",
+    author="Adrien Rebuzzi (darokin)",
     author_email="darokin42@gmail.com",
-    description="Terminal ASCII clock",
+    description="Terminal ASCII digital clock",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/darokin/darshell-clock",

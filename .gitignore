@@ -12,6 +12,9 @@ darshellclock/__pycache__/
 dist/
 darshellclock.egg-info/
 TODO.md
+build/
+dist/
+lib/
 
 # Environments
 pyvenv.cfg
@@ -24,3 +27,5 @@ pyvenv.cfg
 
 # debug main for vscode quicklaunch
 debugmain.py
+
+darshellclock.egg-info/PKG-INFO
