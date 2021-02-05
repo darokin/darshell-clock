@@ -1,12 +1,11 @@
 import curses
-#from darshellclock.utils import ceil
 
 from .utils import ceil
 
 
 # Draw a rectangle at X , Y with WITH AND HEIGHT
 # ... ncurses as it but i can stend invert x,y and having lower right pos instead of width and height
-def rect(win, _px, _py, _w, _h): 
+def rect(win, _px, _py, _w, _h):
 	win.vline(_py+1, _px, curses.ACS_VLINE, _h - 1)
 	win.hline(_py, _px+1, curses.ACS_HLINE, _w - 1)
 	win.hline(_py + _h, _px+1, curses.ACS_HLINE, _w - 1)
@@ -34,7 +33,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _color):
 	if _nbCols > 0:
 		_nbLines = ceil(len(_data), _nbCols)
 	elif _nbLines == 0:
-	 	_nbLines = len(_data)
+		_nbLines = len(_data)
 
 	maxLenColsArr = []
 	# Find width now if centering needed
@@ -46,7 +45,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _color):
 		if ind > 0 and (((ind + 1) % _nbLines) == 0 or ind == (len(_data) - 1)):
 			totalWidth = totalWidth + maxLenCol + 1
 			maxLenColsArr.append(maxLenCol)
-			maxLenCol = 1	
+			maxLenCol = 1
 
 	# Centering calculations
 	height, width = stdscr.getmaxyx()
@@ -62,12 +61,12 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _color):
 	# Background
 	for yy in range(_nbLines):
 		for xx in range(totalWidth - 1):
-			stdscr.addch(_y + yy + 1, _x + xx + 1, '█', curses.color_pair(8))# + curses.A_REVERSE)
+			stdscr.addch(_y + yy + 1, _x + xx + 1, '█', curses.color_pair(8))  # + curses.A_REVERSE)
 
 	maxLenColInd = 0
 	_y = baseY + 1
 	for ind, vv in enumerate(_data):
-		# Show help info 
+		# Show help info
 		stdscr.addstr(_y, _x + 2, vv[0], curses.color_pair(_color) + curses.A_BOLD)
 		stdscr.addstr(_y, _x + 4, vv[1])
 
@@ -83,17 +82,17 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _color):
 					stdscr.addch(_y - i, _x + maxLenCol + 1, curses.ACS_VLINE, curses.color_pair(_color) + curses.A_BOLD)
 			_x = _x + maxLenCol + 1
 			_y = baseY + 1
-			#_y = _y - (_nbLines - 1)
+			# _y = _y - (_nbLines - 1)
 			maxLenColInd += 1
 		else:
-			_y += 1 
+			_y += 1
 
 	# Handling title positionning
 	# defaut upper left title
 	titleX = baseX + 2
 	if _title[:3] == "%C%":
 		_title = _title[3:]
-		titleX = baseX + (totalWidth // 2) - (len(_title) // 2)#ceil(len(_title), 2)
+		titleX = baseX + (totalWidth // 2) - (len(_title) // 2)  # ceil(len(_title), 2)
 		if totalWidth % 2 == 0 or len(_title) % 2 != 0:
 			titleX = titleX - 1
 	elif _title[:3] == "%R%":
@@ -121,9 +120,9 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _color):
 	# Draw frame
 	stdscr.attron(curses.color_pair(_color))
 	rect(stdscr, baseX, baseY, totalWidth, _nbLines + 1)
-	#rect(stdscr, _x - totalWidth + maxLenColsArr[maxLenColInd] + 1, _y - , totalWidth, _nbLines + 1)
+	# rect(stdscr, _x - totalWidth + maxLenColsArr[maxLenColInd] + 1, _y - , totalWidth, _nbLines + 1)
 	stdscr.attroff(curses.color_pair(_color))
 	# Title
-	stdscr.addstr( baseY, titleX, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD)
+	stdscr.addstr(baseY, titleX, " " + _title + " ", curses.color_pair(_color) + curses.A_BOLD)
 	# Footer
 	stdscr.addstr(baseY + _nbLines + 1, footerX, " " + _footer + " ", curses.color_pair(6) + curses.A_BOLD)
