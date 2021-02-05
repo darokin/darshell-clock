@@ -7,6 +7,7 @@ from .globals import (
 	MIN_BIG_WIDTH, MIN_BIG_HEIGHT,
 	CONF_FILEPATH,
 	MAX_COLORS,
+	startTime, stopSeconds,
 	arrNumBig, arrNumSmall,
 	helpMenu
 )
@@ -200,6 +201,11 @@ def draw_main(stdscr):
 		stdscr.refresh()
 		key = stdscr.getch()
 		stdscr.timeout(1000)
+
+		# Test auto closing time
+		if startTime <> -1:
+			if datetime.datetime.now().second - startTime > stopSeconds:
+				endcurse(stdscr, false)
 
 		# Key inputs
 		if key == ord("z") or key == ord("Z"):  # key == curses.KEY_UP:

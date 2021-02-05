@@ -10,8 +10,15 @@ MIN_BIG_HEIGHT = 10
 # TODO voir pour stocker ailleurs..
 CONF_FILEPATH = "./darclock.cfg"
 
+# #############
+# Variables now
+# #############
 # Not a constant, set after color init
 MAX_COLORS = 0
+
+# For the auto closing funtionnality
+startTime = -1
+stopSeconds = 0
 
 # ASCII digits, from 0 to 9 plus a : sign at the end for the hour/minute separator
 # BIG ASCII DIGITS
