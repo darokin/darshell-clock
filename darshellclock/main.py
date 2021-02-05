@@ -3,7 +3,7 @@ import argparse
 
 from .utils import get_terminal_size
 from .globals import (
-	MIN_HEIGHT, MIN_WIDTH, 
+	MIN_HEIGHT, MIN_WIDTH,
 	startTime, stopSeconds
 )
 from .clock import start
@@ -18,8 +18,8 @@ class CapitalisedHelpFormatter(argparse.HelpFormatter):
 
 
 def init():
-	global startTime, stopSeconds
-	
+	global .globals.startTime, .globals.stopSeconds
+
 	# Argument parsing
 	parser = argparse.ArgumentParser(description="In the app, use Q to quit and H to see how to change colors and settings.", add_help=False, formatter_class=CapitalisedHelpFormatter)
 	parser._positionals.title = 'Positional arguments'
@@ -44,8 +44,8 @@ def init():
 		exit()
 
 	if args.stop > 0:
-		stopSeconds = args.stop
-		startTime = datetime.datetime.now().second
+		.globals.stopSeconds = args.stop
+		.globals.startTime = datetime.datetime.now().second
 
 	rows, columns = get_terminal_size()
 	if int(rows) < MIN_HEIGHT or int(columns) < MIN_WIDTH:

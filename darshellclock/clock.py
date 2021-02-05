@@ -203,7 +203,7 @@ def draw_main(stdscr):
 		stdscr.timeout(1000)
 
 		# Test auto closing time
-		if startTime <> -1:
+		if startTime != -1:
 			if datetime.datetime.now().second - startTime > stopSeconds:
 				endcurse(stdscr, false)
 
