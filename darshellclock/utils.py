@@ -1,7 +1,7 @@
 # Utility functions
 import os
 import sys
-from .globals import MIN_BIG_WIDTH, MIN_BIG_HEIGHT
+from .cfg import MIN_BIG_WIDTH, MIN_BIG_HEIGHT
 
 
 # Cell do as // but ceil instead of floor, ok for integers

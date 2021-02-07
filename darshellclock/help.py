@@ -61,7 +61,7 @@ def showHelp(stdscr, _data, _x, _y, _title, _footer, _nbCols, _color):
 	# Background
 	for yy in range(_nbLines):
 		for xx in range(totalWidth - 1):
-			stdscr.addch(_y + yy + 1, _x + xx + 1, '█', curses.color_pair(8))  # + curses.A_REVERSE)
+			stdscr.addch(_y + yy + 1, _x + xx + 1, '█', curses.color_pair(8) + curses.A_REVERSE)
 
 	maxLenColInd = 0
 	_y = baseY + 1

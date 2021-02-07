@@ -2,11 +2,23 @@ import datetime
 import argparse
 
 from .utils import get_terminal_size
-from .globals import (
-	MIN_HEIGHT, MIN_WIDTH,
-	startTime, stopSeconds
+from .cfg import (
+	MIN_HEIGHT, MIN_WIDTH
 )
 from .clock import start
+
+nfoData = r"""
+			 ___________________
+  ┌─────____/   \___   \        \─────────────┐\
+  │    /   /    /   \   \    \__/ - darokin - │
+  │----\_______/\_______/\___/----------------│
+  │                                           │
+  │ darshellclock v1.0.1                 2021 │
+  │ Minimalist terminal digital clock         │
+  │                                           │
+  │ https://github.com/darokin/darshell-clock │
+  └───────────────────────────────────────────┘
+"""
 
 
 class CapitalisedHelpFormatter(argparse.HelpFormatter):
@@ -18,7 +30,7 @@ class CapitalisedHelpFormatter(argparse.HelpFormatter):
 
 
 def init():
-	global .globals.startTime, .globals.stopSeconds
+	_stopSeconds = 0
 
 	# Argument parsing
 	parser = argparse.ArgumentParser(description="In the app, use Q to quit and H to see how to change colors and settings.", add_help=False, formatter_class=CapitalisedHelpFormatter)
@@ -26,26 +38,16 @@ def init():
 	parser._optionals.title = 'Optional arguments'
 	parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0', help="Show program's version number.")
 	parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='No specific arguments, hit "H in while in the app.')
-	parser.add_argument("-s", "--stop", type=int, help="Auto close in n seconds")
+	parser.add_argument("-s", "--stop", type=int, default=0, help="Auto close in <STOP> seconds")
 	parser.add_argument("-i", "--info", action="store_true")
 	args = parser.parse_args()
 
-	# _VersionAction(option_strings=['-v', '--version'], dest='version', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help="Show program's version number and exit.", metavar=None)
-	# _HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None, default='==SUPPRESS==', type=None, choices=None, help='Q to QUIT / H for HELP box in app', metavar=None)
-
 	if args.info:
-		print("Display .nfo file. Not yet available sorry.")
-		# open .nfo file
-		# nfofile = open("darshellclock.nfo", 'r')
-		# nfofile.readlines()
-		# nfofile.close()
-		# for nfoline in nfofile:
-		# print(nfoline)
+		print(nfoData)
 		exit()
 
 	if args.stop > 0:
-		.globals.stopSeconds = args.stop
-		.globals.startTime = datetime.datetime.now().second
+		_stopSeconds = args.stop
 
 	rows, columns = get_terminal_size()
 	if int(rows) < MIN_HEIGHT or int(columns) < MIN_WIDTH:
@@ -55,4 +57,4 @@ def init():
 		exit()
 
 	# All is good, launching clock
-	start()
+	start(_stopSeconds)

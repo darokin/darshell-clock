@@ -2,7 +2,7 @@
 
 # Custom imports
 from .help import showHelp
-from .globals import (
+from .cfg import (
 	MIN_WIDTH, MIN_HEIGHT,
 	MIN_BIG_WIDTH, MIN_BIG_HEIGHT,
 	CONF_FILEPATH,
@@ -91,7 +91,7 @@ def endcurse(stdscr, bError):
 	if bError:
 		rows, columns = get_terminal_size()
 		sys.stdout.write("Need minimum of [" + str(MIN_HEIGHT) + "x" + str(MIN_WIDTH) + "] for ASCII render. Your terminal is [" + str(rows) + "x" + str(columns) + "]. ")
-		exit()
+	exit()
 
 
 def draw_main(stdscr):
@@ -104,6 +104,9 @@ def draw_main(stdscr):
 	global colorDateNum
 	global lastKey
 	global arrNum
+
+	global startTime
+	global stopSeconds
 
 	init(stdscr)
 	intColors()
@@ -195,17 +198,17 @@ def draw_main(stdscr):
 
 		# Draw Help
 		if isHelp:
-			showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH - 4) else 1), 0, colorClockNum)
+			showHelp(stdscr, helpMenu, -1, -1, "H E L P", "%C%@darokin ♥", (2 if width > (MIN_BIG_WIDTH - 4) else 1), colorClockNum)
+
+		# Test auto closing time
+		if startTime != -1:
+			if datetime.datetime.now().second - startTime > stopSeconds:
+				endcurse(stdscr, False)
 
 		# Refresh / Timeout
 		stdscr.refresh()
 		key = stdscr.getch()
 		stdscr.timeout(1000)
-
-		# Test auto closing time
-		if startTime != -1:
-			if datetime.datetime.now().second - startTime > stopSeconds:
-				endcurse(stdscr, false)
 
 		# Key inputs
 		if key == ord("z") or key == ord("Z"):  # key == curses.KEY_UP:
@@ -222,8 +225,6 @@ def draw_main(stdscr):
 			isSecsAff = not isSecsAff
 		elif key == ord('h'):
 			isHelp = not isHelp
-		# elif key == ord('s'):
-		# 	isBig = not isBig
 		# elif key == ord('e'):
 		# 	lastKey = "e"
 		# elif key == ord('r') and lastKey == "e":
@@ -256,7 +257,15 @@ def readConfFile():
 		colorDateNum = int(tabconf[2])
 
 
-def start():
+def start(_stopSeconds):
+	global startTime
+	global stopSeconds
+
+	# Init global variables for autoclosing
+	if _stopSeconds > 0:
+		startTime = datetime.datetime.now().second
+		stopSeconds = _stopSeconds
+
 	# Read configuration file
 	readConfFile()
 
