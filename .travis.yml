@@ -13,7 +13,8 @@ install:
 before_script:
 # ignore W191 (tabs instead of spacese)
 # ignore E501 (lines > 80 char)
-# ignort E101 (mixed tabs and spaces) for ASCII nfo
-  - flake8 --extend-ignore=W191,E501,E101 .
+# ignore E101 (mixed tabs and spaces) for ASCII nfo
+# ignore F401 (unused var) for globals import...(startTime and stopSeconds)
+  - flake8 --extend-ignore=W191,E501,E101,F401 .
 script:
   - pytest
