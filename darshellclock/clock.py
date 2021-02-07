@@ -29,7 +29,6 @@ isDateAff = True
 isSecsAff = False
 colorClockNum = 1
 colorDateNum = 6
-# lastKey = ""
 
 
 def draw_number(num, posx, posy, stdscr):

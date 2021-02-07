@@ -13,6 +13,7 @@ install:
 before_script:
 # ignore W191 (tabs instead of spacese)
 # ignore E501 (lines > 80 char)
-  - flake8 --extend-ignore=W191,E501 .
+# ignort E101 (mixed tabs and spaces) for ASCII nfo
+  - flake8 --extend-ignore=W191,E501,E101 .
 script:
   - pytest
