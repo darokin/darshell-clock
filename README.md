@@ -6,6 +6,8 @@
 ![Github last version](https://img.shields.io/github/v/release/darokin/darshell-clock?include_prereleases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+#### :warning: Please use **pip3** or **python3** instead of pip and python
+
 **darshellclock** is a *MINIMALIST* console application to display time and date with nice ASCII digits in your terminal. Uses *curses*
 
 Here is a demo but mostly you would use this in a small persistant terminal. (More on "why this project?" in the side notes at the end)
@@ -17,14 +19,14 @@ Here is a demo but mostly you would use this in a small persistant terminal. (Mo
 Suitable for quite small terminal sizes.
 Useful for having a clock sitting around if you use a tiling window manager or tmux for example.
 
- - Nice 'blocky' ASCII digits
- - Localised date format
+ - Nice 'blocky' ASCII digits :yellow_heart:
+ - Localised date format :airplane:
  - 2 sizes of digits, smaller digits for smaller term
  - Autoresizing and centering
  - Color selection of the time or the date
  - Possibility to hide the date and/or the seconds
  - Autoclosing (if wanted, see arguments in 'Usage and keys')
- - All the parameters are saved upon exit
+ - All the parameters are saved upon exit :+1:
  
 
 ## Usage and keys
@@ -52,9 +54,9 @@ While in the app, use these keys to change the configuration :
 
 Use Python 3.x
 
-Install using pip:
+Install using **pip3**:
 ```bash
- pip install darshellclock 	# installing
+ pip3 install darshellclock 	# installing
  darshellclock			# lauching
 ```
 Or if you want to do it manually you can clone or downlad and extract the project:
@@ -70,7 +72,7 @@ $ darshellclock                   # to launch installed version
 
 ## Side notes
 
-This program was mainly made to try out a whole life cycle of a simple python app and to grasp new skills around github/CI/python package distribution/etc.
+:information_desk_person: This program was mainly made to try out a whole life cycle of a simple python app and to grasp new skills around github/CI/python package distribution/etc.
 The [discussion section](https://github.com/darokin/darshell-clock/discussions) is open if needed.
 
 If you encounter any problem or have any suggestions, please [open an issue](https://github.com/darokin/darshell-clock/issues/new) or [send a pull request](https://github.com/darokin/darshell-clock/pulls).
