@@ -6,7 +6,7 @@
 ![Github last version](https://img.shields.io/github/v/release/darokin/darshell-clock?include_prereleases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-#### :warning: Please use **pip3** or **python3** instead of pip and python
+### :warning: Please use **pip3** or **python3** instead of pip and python
 
 **darshellclock** is a *MINIMALIST* console application to display time and date with nice ASCII digits in your terminal. Uses *curses*
 
@@ -19,7 +19,7 @@ Here is a demo but mostly you would use this in a small persistant terminal. (Mo
 Suitable for quite small terminal sizes.
 Useful for having a clock sitting around if you use a tiling window manager or tmux for example.
 
- - Nice 'blocky' ASCII digits :yellow_heart:
+ - Nice 'blocky' ASCII digits :purple_heart:
  - Localised date format :airplane:
  - 2 sizes of digits, smaller digits for smaller term
  - Autoresizing and centering
@@ -53,6 +53,8 @@ While in the app, use these keys to change the configuration :
 ## Installing and starting
 
 Use Python 3.x
+
+:warning: Please use **pip3** or **python3** instead of pip and python
 
 Install using **pip3**:
 ```bash
