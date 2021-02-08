@@ -3,6 +3,7 @@ darshellclock/darclock.cfg
 darclock.cfg
 
 # Generics
+darshellclock/*.pyc
 bin/
 lib/
 __pycache__/

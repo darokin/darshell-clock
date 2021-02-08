@@ -8,12 +8,12 @@ from .cfg import (
 from .clock import start
 
 nfoData = r"""
-			 ___________________
-  ┌─────____/   \___   \        \─────────────┐\
+             ___________________
+  ┌─────____/   \___   \        \─────────────┐
   │    /   /    /   \   \    \__/ - darokin - │
   │----\_______/\_______/\___/----------------│
   │                                           │
-  │ darshellclock v1.0.1                 2021 │
+  │ darshellclock v1.1.1                 2021 │
   │ Minimalist terminal digital clock         │
   │                                           │
   │ https://github.com/darokin/darshell-clock │
