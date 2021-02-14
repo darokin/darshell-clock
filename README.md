@@ -1,18 +1,21 @@
+### :warning: Please use **pip3** or **python3** instead of pip and python
+<p></p>
+
 # darshell-clock
 
 ![Python application](https://github.com/darokin/darshell-clock/workflows/Python%20application/badge.svg)
 [![Build Status](https://travis-ci.com/darokin/darshell-clock.svg?branch=master)](https://travis-ci.com/darokin/darshell-clock)
 ![GitHub last commit](https://img.shields.io/github/last-commit/darokin/darshell-clock)
 ![Github last version](https://img.shields.io/github/v/release/darokin/darshell-clock?include_prereleases)
+[![PyPI version shields.io](https://img.shields.io/pypi/v/darshellclock.svg)](https://pypi.python.org/pypi/darshellclock/)
+[![PyPI download month](https://img.shields.io/pypi/dm/darshellclock.svg)](https://pypi.python.org/pypi/darshellclock/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
-### :warning: Please use **pip3** or **python3** instead of pip and python
 
 **darshellclock** is a *MINIMALIST* console application to display time and date with nice ASCII digits in your terminal. Uses *curses*
 
 Here is a demo but mostly you would use this in a small persistant terminal. (More on "why this project?" in the side notes at the end)
 
-<p align="center"><img src="http://darokin.info/imgs/darshellclock.gif" alt="darshellclock demo"/></p>
+<p align="center"><img src="http://darokin.info/github/imgs/darshellclock_01.gif" alt="darshellclock demo"/></p>
 
 ## Features
 
@@ -42,13 +45,13 @@ While in the app, use these keys to change the configuration :
 
 | Key  | Purpose          
 |------|--------------------
-| h    | Show or hide help |
-| q    | Quit              |
-| z    | Change time color |
-| x    | Change date color |
-| d    | Show or hide date |
-| s    | Show or hide secs |
-
+| <kbd>h</kbd> | Show or hide help |
+| <kbd>q</kbd> | Quit              |
+| <kbd>z</kbd> | Change time color |
+| <kbd>x</kbd> | Change date color |
+| <kbd>d</kbd> | Show or hide date |
+| <kbd>s</kbd> | Show or hide secs |
+<p></p>
 
 ## Installing and starting
 
@@ -58,8 +61,8 @@ Use Python 3.x
 
 Install using **pip3**:
 ```bash
- pip3 install darshellclock 	# installing
- darshellclock			# lauching
+$ pip3 install darshellclock 	# installing
+$ darshellclock			# lauching
 ```
 Or if you want to do it manually you can clone or downlad and extract the project:
 
