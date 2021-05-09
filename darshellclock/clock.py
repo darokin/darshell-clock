@@ -78,6 +78,7 @@ def intColors():
 	curses.init_pair(7, curses.COLOR_CYAN, -1)
 	MAX_COLORS = 7
 	# for black bg on box
+	# TODO laisser comme ça pour unix mais pour OSX et windows mettre COLOR_BLACK, tester avant
 	curses.init_pair(8, -1, -1)
 
 
